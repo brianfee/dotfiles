@@ -1,0 +1,52 @@
+#!/bin/bash
+
+inputPipe="/tmp/rrnotify/input.pipe"
+
+defaultTimer=3
+verbosity=0
+
+output_test() {
+	case $@ in
+		echo) echo $@;;
+		dunst) echo notify-send;;
+		notify-send) echo $@;;
+		lemonbar) echo $@;;
+		*) echo default;;
+	esac
+}
+
+number_test() {
+	if ! [[ "$@" =~ ^[0-9]+$ ]]; then
+		echo $defaultTimer
+	else
+		echo $@
+	fi
+}
+
+while getopts o:t:v arg; do
+	case "${arg}" in
+		o) output=${OPTARG};;
+		t) timer=${OPTARG};;	
+		v) verbosity=1;;
+	esac
+done
+shift "$(($OPTIND -1))"
+
+output="$(output_test "$output")"
+timer="$(number_test "$timer")"
+string="$@"
+
+if [[ "$verbosity" -eq 1 ]]; then
+	echo "Output: $output"
+	echo "Timer: $timer"
+	echo "String: $string"
+fi
+
+if [[ "$output" == "echo" ]] || ! [ -p $inputPipe ]; then
+	echo $string
+elif [[ "$output" == "notify-send" ]]; then
+	(( timer *= 1000 ))
+	notify-send -t $timer $string
+else
+	echo $string >> $inputPipe
+fi

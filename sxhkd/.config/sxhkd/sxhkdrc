@@ -1,0 +1,159 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	st
+
+# launch ranger in terminal
+super + e
+	st ranger
+
+# browser launcher
+super + shift + Return
+	firefox --private-window https://check.torproject.org
+
+# program launcher
+super + space
+	rofi -show run
+
+# window switching menu
+alt + Tab
+	rofi -show window
+
+# make sxhkd reload its configuration files:
+super + Escape
+	rrnotify Reloading SXHKD; \
+	pkill -SIGUSR1 -x sxhkd
+
+# Fx Keys
+XF86MonBrightnessUp
+	rrbacklight +5
+XF86MonBrightnessDown
+	rrbacklight -5
+super + XF86MonBrightnessUp
+	rrbacklight =100
+super + XF86MonBrightnessDown
+	rrbacklight =1
+XF86AudioRaiseVolume
+	amixer -q sset Master on && amixer -q sset Master 10%+
+XF86AudioLowerVolume
+	amixer -q sset Master on && amixer -q sset Master 10%-
+XF86AudioMute
+	amixer -q sset Master toggle
+
+# battery notification
+super + b
+	rrbattery
+
+#
+# bspwm hotkeys
+#
+
+# quit bspwm normally
+super + shift + Escape
+	bspc quit
+
+# close
+super + shift + q
+	bspc node -c
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,shift + f,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {x,y,z}
+	bspc node -g {locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,shift + p,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'; \
+	rrdesktop
+
+#
+# Gaps
+#
+super + {plus,minus}
+	bspc config -m focused window_gap {16,0}
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window in all directions
+super + alt + equal
+	bspc node -z left -50 0; \
+	bspc node -z right 50 0; \
+	bspc node -z bottom 0 50; \
+	bspc node -z top 0 -50;
+
+# shrink a window in all directions
+super + alt + minus
+	bspc node -z left 50 0; \
+	bspc node -z right -50 0; \
+	bspc node -z top 0 50; \
+	bspc node -z bottom 0 -50;
+
+# resize all windows in parent of current node
+super + equal
+	bspc node -f @parent; \
+	bspc node -B; \
+	bspc node -f last;
+
+# grow/shrink according to location
+super + alt + {h,j,k,l}
+	bspc_resize.sh {west,south,north,east} 50
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-50 0,0 50,0 -50,50 0}

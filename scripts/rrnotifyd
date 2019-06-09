@@ -1,0 +1,82 @@
+#!/bin/bash
+
+SELF='rrnotifyd'
+DIR='/tmp/rrnotify'
+TIMER="$DIR/timer"
+IPIPE="$DIR/input.pipe"
+OPIPE="$DIR/output.pipe"
+DELAY=3
+
+destructor() {
+	echo "Breaking down process"
+	rrnotify Breaking down process
+	sleep $DELAY
+	kill $@
+	rm -r $DIR
+	exit
+}
+
+# Check for Fullscreen
+determine_fullscreen() {
+	# Check Window Manager
+	DESKTOP=`echo $DESKTOP_SESSION`
+}
+
+# Read Input
+input_parser() {
+	# Change to Lemonbar tags
+	# Change to Polybar tags
+	echo $DELAY > $TIMER
+	echo -e $(rrformatter.py polybar $@) > $OPIPE
+	# Change to Dunst Tags
+}
+
+# Run default program
+default() {
+	START=$SECONDS
+	WAITTIME=0
+	while true; do
+		# Check for new timer
+		if [ -f $TIMER ]; then
+			START=$SECONDS
+			WAITTIME=$(cat $TIMER)
+			rm $TIMER
+		fi
+
+		# Check for exceeding timer
+		duration=$(( SECONDS - START ))
+		if [ $duration -ge $WAITTIME ]; then
+			eval $@
+		fi
+		sleep 1
+	done
+}
+
+# Check to ensure a single daemon process is running
+PID=`pgrep -n $SELF`
+if [ $PID -ne `pgrep -o $SELF` ]; then
+	echo 'Process already running'
+	exit 1
+fi
+
+# Create trap to properly dispose of temporary directories
+trap 'destructor $DEFAULTPID' SIGINT SIGKILL
+
+# Create temporary directories and named pipes
+mkdir -p $DIR
+mkfifo $IPIPE $OPIPE
+
+# Start default process
+default "$@" &
+DEFAULTPID=$!
+
+# Startup
+	# Monitor Input Pipe for text
+	# Redirect input into handler
+	# Export output to 
+
+while true; do
+	input_parser `head -n 1 $IPIPE`
+done
+
+destructor

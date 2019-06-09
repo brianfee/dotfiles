@@ -1,0 +1,6 @@
+Xft.dpi: 96
+
+! Rofi Settings
+rofi*bw: 1
+rofi*font: Hack 10
+rofi*scrollbar-width: 1

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+killall polybar
+
+case $@ in
+1080p)
+	xrandr --output eDP1 --mode 1920x1080
+	xrdb -merge ~/.Xresources.d/1080p
+	exec ~/.fehbg
+	polybar 1080p &
+	;;
+4k)
+	xrandr --output eDP1 --mode 3840x2160
+	xrdb -merge ~/.Xresources.d/4k
+	exec ~/.fehbg
+	polybar default &
+	;;
+*)
+	echo 'Screen size required'
+	polybar default &
+	;;
+esac
+

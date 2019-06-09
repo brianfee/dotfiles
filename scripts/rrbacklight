@@ -1,0 +1,36 @@
+#!/bin/sh
+
+ICON="{reset}{font=3} {font=0}"
+LIGHTDIR=/sys/class/backlight/intel_backlight
+
+echo_string() {
+	LIGHT=`cat $LIGHTDIR/brightness`
+	MAX=`cat $LIGHTDIR/max_brightness`
+
+	let BRIGHTNESS=$LIGHT*100/$MAX/5
+
+	OUTPUT="{center}$ICON {accent}"
+
+	i=0
+	while [ "$i" -lt 21 ]
+	do
+		if [ $i == $BRIGHTNESS ]
+		then
+			OUTPUT="$OUTPUT{fg}┃{disabled}"
+		else
+			if [ $i -lt $BRIGHTNESS ]
+			then
+				OUTPUT="$OUTPUT━"
+			else
+				OUTPUT="$OUTPUT━"
+			fi
+		fi
+		i=$((i+1))
+	done
+
+	OUTPUT="$OUTPUT{reset}"
+	echo -n $OUTPUT
+}
+
+xbacklight "$@"
+rrnotify $(echo_string)

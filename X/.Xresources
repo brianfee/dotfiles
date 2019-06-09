@@ -1,0 +1,48 @@
+Xft.dpi: 192
+
+! Rofi Settings
+rofi*bw: 2
+rofi*font: Hack 20
+rofi*separator-style: solid
+rofi*scrollbar-width: 2
+rofi*color-window: #202020, #0b76de, #303030
+rofi*color-normal: #202020, #cccccc, #202020, #0b76de, #eeeeee
+rofi*color-urgent: #202020, #e25147, #202020, #303030, #e25147
+
+! Terminal Colors
+! special
+*.foreground:   #eeeeee
+*.background:   #181818
+*.cursorColor:  #eeeeee
+
+! black
+*.color0:       #484848
+*.color8:       #767676
+
+! red
+*.color1:       #ce211e
+*.color9:       #fa3d33
+
+! green
+*.color2:       #8fc029
+*.color10:      #a7e22e
+
+! yellow
+*.color3:       #fe7a09
+*.color11:      #fb8f32
+
+! blue
+*.color4:       #55bcce
+*.color12:      #66d9ee
+
+! magenta
+*.color5:       #9358fe
+*.color13:      #ae82ff
+
+! cyan
+*.color6:       #56b7a5
+*.color14:      #66efd5
+
+! white
+*.color7:       #aaaaaa
+*.color15:      #cccccc

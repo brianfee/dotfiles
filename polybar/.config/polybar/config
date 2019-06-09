@@ -1,0 +1,199 @@
+; ======================================== Bars ========================================
+; -------------------- X Resources Bar --------------------
+[bar/default]
+; ----------- Bar Colors -----------
+foreground =		#FEFEFE
+fg_alt =		#CCCCCC
+background =		#25181818
+bg_alt =		#303030
+accent =		#0B76DE
+acc_fg =		#EEEEEE
+disabled =		#666666
+warning =		#E25147
+
+; ---------- Bar Variables ----------
+cursor-click = pointer
+
+; ---------- Bar Fonts ----------
+font-0 = "Noto Sans:style=Bold:size=9.5;2"
+font-1 = FontAwesome:size=9;2.5
+font-2 = FontAwesome:size=13;4.5
+font-3 = Hack:size=10;2
+
+
+; ---------- Bar Settings ----------
+dpi = 192
+height = 64
+width = 100%
+padding = 4
+module-margin = 2
+fixed-center = true
+
+modules-left = pulseaudio xkeyboard 
+modules-center = rrwatcher
+modules-right = battery
+
+; ---------- System Tray ----------
+tray-position = none
+tray-padding = ${self.padding}
+tray-background = ${self.accent}
+
+
+
+; -------------------- X Resources Bar --------------------
+[bar/1080p]
+; ----------- Bar Colors -----------
+foreground =	#FEFEFE
+fg_alt =		#CCCCCC
+background =	#25181818
+bg_alt =		#303030
+accent =		#0B76DE
+acc_fg =		#EEEEEE
+disabled =		#666666
+warning =		#E25147
+
+; ---------- Bar Variables ----------
+cursor-click = pointer
+
+; ---------- Bar Fonts ----------
+font-0 = "Noto Sans:style=Bold:size=9;2"
+font-1 = FontAwesome:size=8.5;2.5
+font-2 = FontAwesome:size=13;4.5
+font-3 = Hack:size=10;2
+
+
+; ---------- Bar Settings ----------
+dpi = 96
+height = 32
+width = 100%
+padding = 4
+module-margin = 1
+fixed-center = true
+
+modules-left = pulseaudio xkeyboard 
+modules-center = rrwatcher
+modules-right = battery
+
+; ---------- System Tray ----------
+tray-position = none
+tray-padding = ${self.padding}
+tray-background = ${self.accent}
+
+
+
+; ======================================== Modules ========================================
+[module/bspwm]
+type = internal/bspwm
+format = <label-state>
+enable-click = true
+enable-scroll = false
+label-focused = " "
+label-focused-foreground = ${root.accent}
+label-focused-padding = ${root.padding}
+label-focused-font = 2
+
+label-occupied = " "
+label-occupied-padding = ${self.label-focused-padding}
+
+label-empty = " "
+label-empty-padding = ${self.label-focused-padding}
+
+
+
+[module/date]
+type = internal/date
+
+interval = 2.0
+
+time = %A, %B %d  ·  %R %Z
+
+label = %time%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+format = %{T3}<label-indicator>%{T-}
+
+label-indicator = 
+
+
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume> <ramp-volume>
+label-volume = "%{T3} %{T-}"
+label-volume-foreground = ${root.foreground}
+
+format-muted = <label-muted> <ramp-volume>
+label-muted = ${self.label-volume}
+label-muted-foreground = ${root.disabled}
+
+ramp-volume-0  =      
+ramp-volume-1  =      
+ramp-volume-2  =      
+ramp-volume-3  =      
+ramp-volume-4  =      
+ramp-volume-5  =      
+ramp-volume-6  =      
+ramp-volume-7  =      
+ramp-volume-8  =      
+ramp-volume-9  =      
+ramp-volume-10 =      
+
+
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+
+format-connected-foreground = ${root.foreground}
+label-connected = %{T3}%{A1:wifiNotify.sh:}  %{A}%{T-}
+
+format-disconnected-foreground = ${root.disabled}
+label-disconnected = ${self.label-connected}
+
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <ramp-capacity> <label-charging>
+label-charging = "%{T3} %{T-}"
+label-charging-foreground = ${root.foreground}
+
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = ${self.label-charging}
+label-discharging-foreground = ${root.disabled}
+
+format-full =       <label-full>
+label-full = ${self.label-charging}
+
+ramp-capacity-0-foreground = ${root.warning}
+
+ramp-capacity-0  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-1  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-2  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-3  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-4  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-5  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-6  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-7  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-8  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-9  = %{A:batteryNotify.sh:}     %{A}
+
+
+[module/rrwatcher]
+type = custom/script
+
+exec = rrwatcher
+interval = 0.5
+
+
+
+[global/wm]
+;margin-top = 5
+;margin-bottom = 5
