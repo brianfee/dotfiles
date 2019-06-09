@@ -1,18 +1,21 @@
-#
+#-----------------------------
 # wm independent hotkeys
+#-----------------------------
+
+#
+# Applications
 #
 
-# terminal emulator
-super + Return
-	st
+# Most used applications
+super + {_,shift + }Return
+	{st, firefox --private-window https://check.torproject.org}	
+
+super + o; {c,f}
+	{chromium, firefox}
 
 # launch ranger in terminal
 super + e
 	st ranger
-
-# browser launcher
-super + shift + Return
-	firefox --private-window https://check.torproject.org
 
 # program launcher
 super + space
@@ -22,38 +25,49 @@ super + space
 alt + Tab
 	rofi -show window
 
-# make sxhkd reload its configuration files:
-super + Escape
-	rrnotify Reloading SXHKD; \
-	pkill -SIGUSR1 -x sxhkd
 
+#
 # Fx Keys
-XF86MonBrightnessUp
-	rrbacklight +5
-XF86MonBrightnessDown
-	rrbacklight -5
-super + XF86MonBrightnessUp
-	rrbacklight =100
-super + XF86MonBrightnessDown
-	rrbacklight =1
-XF86AudioRaiseVolume
-	amixer -q sset Master on && amixer -q sset Master 10%+
-XF86AudioLowerVolume
-	amixer -q sset Master on && amixer -q sset Master 10%-
+#
+
+# Brightness
+{_,shift + ,super + }XF86MonBrightness{Down,Up}
+	rrbacklight {-5, -10, =1, +5, +10, =100}
+
+# Volume
+XF86Audio{LowerVolume,RaiseVolume}
+	amixer -q sset Master on && amixer -q sset Master 10%{-,+}
+
 XF86AudioMute
 	amixer -q sset Master toggle
 
-# battery notification
-super + b
-	rrbattery
+
+#
+# Notifications
+#
+
+super + i ; {b,d,l,i}
+	{rrbattery,rrdesktop,rrbacklight,rrnotify External IP: `curl icanhazip.com`}
+
+
+#
+# Miscellaneous
+#
 
 # Double Shift -> Caps Lock
 shift + ~Shift_{L,R}
 	xdotool key Caps_Lock
 
-#
+# Reload sxhkd configuration files:
+super + Escape
+	rrnotify Reloading SXHKD; \
+	pkill -SIGUSR1 -x sxhkd
+
+
+
+#-----------------------------
 # bspwm hotkeys
-#
+#-----------------------------
 
 # quit bspwm normally
 super + shift + Escape
@@ -107,6 +121,7 @@ super + {_,shift + }{1-9,0}
 #
 # Gaps
 #
+
 super + {plus,minus}
 	bspc config -m focused window_gap {16,0}
 
