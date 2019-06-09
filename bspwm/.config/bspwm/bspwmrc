@@ -13,9 +13,6 @@ rrnotifyd rrdate &
 ~/.config/polybar/launch.sh
 poly-notify.sh &
 
-# Start light-locker
-light-locker &
-
 # Hotkeys
 killall -q sxhkd
 while pgrep -u $UID -x sxhkd >/dev/null; do sleep 1; done
@@ -36,7 +33,3 @@ bspc config borderless_monocle	true
 bspc config gapless_monocle		true
 
 bspc rule -a Gimp state=floating follow=on
-
-bspc rule -a scratchpad sticky=on state=floating layer=above hidden=on 
-
-bspc rule -a tint2-actionbar state=floating layer=above follow=on
