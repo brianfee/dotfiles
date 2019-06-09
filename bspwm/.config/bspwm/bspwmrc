@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# Run xmodmap to load keymappings
+xmodmap ~/.Xmodmap
+
 # Load background image
 ~/.fehbg
 
@@ -12,6 +15,7 @@ rrnotifyd rrdate &
 # Start Polybar
 ~/.config/polybar/launch.sh
 poly-notify.sh &
+
 
 # Hotkeys
 killall -q sxhkd
