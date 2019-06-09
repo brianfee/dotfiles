@@ -47,6 +47,10 @@ XF86AudioMute
 super + b
 	rrbattery
 
+# Double Shift -> Caps Lock
+shift + ~Shift_{L,R}
+	xdotool key Caps_Lock
+
 #
 # bspwm hotkeys
 #
