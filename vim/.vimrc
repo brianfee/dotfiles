@@ -17,3 +17,14 @@ autocmd BufWinEnter *.* silent loadview
 
 " Indent
 set autoindent
+
+" Highlight Searches
+set hlsearch
+
+" Color Changes
+highlight folded ctermbg=black
+highlight search ctermbg=darkblue ctermfg=black
+highlight overlength ctermbg=darkred ctermfg=white
+
+" Length over 80 columns
+match overlength /\%81v.\+/
