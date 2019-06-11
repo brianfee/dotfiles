@@ -11,6 +11,9 @@ set clipboard=unnamedplus
 set tabstop=4
 set shiftwidth=4
 
+" Change tab display
+set list listchars=tab:\|•
+
 " Save / Load views
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
@@ -23,8 +26,9 @@ set hlsearch
 
 " Color Changes
 highlight folded ctermbg=black
-highlight search ctermbg=darkblue ctermfg=black
 highlight overlength ctermbg=darkred ctermfg=white
+highlight search ctermbg=darkblue ctermfg=black
+highlight specialkey ctermfg=darkgrey
 
 " Length over 80 columns
 match overlength /\%81v.\+/
