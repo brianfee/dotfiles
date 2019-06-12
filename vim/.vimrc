@@ -25,10 +25,12 @@ set autoindent
 set hlsearch
 
 " Color Changes
+highlight comment ctermfg=darkblue
 highlight folded ctermbg=black
 highlight overlength ctermbg=darkred ctermfg=white
 highlight search ctermbg=darkblue ctermfg=black
 highlight specialkey ctermfg=darkgrey
+highlight string ctermfg=darkgreen
 
 " Length over 80 columns
 match overlength /\%81v.\+/
