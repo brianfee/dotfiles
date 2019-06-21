@@ -52,3 +52,6 @@ au BufNewFile, BufRead *.py
 	\ set fileformat=unix
 
 
+
+" ---------- NerdTree ----------
+map <C-n> :NERDTreeToggle<CR>
