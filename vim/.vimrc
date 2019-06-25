@@ -40,9 +40,19 @@ highlight string ctermfg=darkgreen
 " Identify Length >= 80 columns
 match overlength /\%80v.\+/
 
+" Split handling
+set splitbelow
+set splitright
+
 " ---------- Key remappings ----------
 " Toggle fold with spacebar
 nnoremap <space> za
+
+" Split Movement
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
 
 
 " ---------- Python Files ----------
