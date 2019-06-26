@@ -1,3 +1,5 @@
+filetype plugin on
+
 set number relativenumber
 syntax on
 
@@ -30,7 +32,7 @@ set backspace=indent,eol,start
 " Color Changes
 highlight comment ctermfg=darkblue
 highlight cursorLineNr ctermfg=darkyellow
-highlight folded ctermbg=black ctermfg=darkgrey
+highlight folded ctermbg=black ctermfg=lightgrey
 highlight lineNr ctermfg=darkgrey
 highlight overlength ctermbg=darkred ctermfg=white
 highlight search ctermbg=darkblue ctermfg=black
@@ -53,14 +55,6 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
-
-
-" ---------- Python Files ----------
-au BufNewFile, BufRead *.py
-	\ set softtabstop=4
-	\ set expandtab
-	\ set fileformat=unix
-
 
 
 " ---------- NerdTree ----------
