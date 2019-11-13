@@ -8,10 +8,10 @@ bspc wm -g | awk -F'[:]' '{print $2, $3, $4, $5, $6}' | {
 		DESKSTATUS="$(eval "echo \$desk$i")"
 		DESKSTATUS="${DESKSTATUS:0:1}"
 
-		if [ $DESKSTATUS = "O" ] || [ $DESKSTATUS = "F" ]; then
+		if [ $DESKSTATUS = "O" ] || [ $DESKSTATUS = "F" ] || [ $DESKSTATUS = "U" ] ; then
 			OUTPUT="$OUTPUT  "
 		
-		elif [ $DESKSTATUS = "o" ]; then
+		elif [ $DESKSTATUS = "o" ] || [ $DESKSTATUS = "u" ]; then
 			OUTPUT="$OUTPUT  "
 
 		elif [ $DESKSTATUS = "f" ]; then
