@@ -1,2 +1,2 @@
 " Markdown specific syntax
-match overlength /\%180v.\+/
+highlight overlength ctermfg=None ctermbg=None
