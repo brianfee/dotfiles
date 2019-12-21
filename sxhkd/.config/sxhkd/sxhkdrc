@@ -32,7 +32,7 @@ alt + Tab
 
 # Brightness
 {_,shift + ,super + }XF86MonBrightness{Down,Up}
-	rrbacklight {-5, -10, =1, +5, +10, =100}
+	xbacklight {-5, -10, =1, +5, +10, =100}
 
 # Volume
 XF86Audio{LowerVolume,RaiseVolume}
@@ -46,9 +46,6 @@ XF86AudioMute
 # Notifications
 #
 
-super + i ; {b,d,l,i}
-	{rrbattery,rrdesktop,rrbacklight,rrnotify External IP: `curl icanhazip.com`}
-
 
 #
 # Miscellaneous
@@ -60,7 +57,6 @@ shift + ~Shift_{L,R}
 
 # Reload sxhkd configuration files:
 super + Escape
-	rrnotify Reloading SXHKD; \
 	pkill -SIGUSR1 -x sxhkd
 
 
@@ -115,8 +111,7 @@ super + {grave,Tab}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'; \
-	rrdesktop
+	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
 # Gaps
