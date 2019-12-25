@@ -11,7 +11,7 @@ battery_str() {
 		then
 			echo "$capacity% %{F$GREY}  %{F-}"
 		else
-			echo "$capacity%    "
+			echo "$capacity%   "
 		fi
 	}
 }
