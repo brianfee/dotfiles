@@ -33,7 +33,17 @@ volume_str() {
 }
 
 
+openvpn_str() {
+	if [ $(pgrep -x openvpn) ]
+	then
+		echo "   "
+	else
+		echo " %{F$GREY}  %{F-}"
+	fi
+}
+
+
 while true; do
-	echo "%{l}$(volume_str)%{c}$(date_str)%{r}$(battery_str)"
+	echo "%{l}$(volume_str)%{c}$(date_str) $(openvpn_str)%{r}$(battery_str)"
 	sleep 1;
 done
