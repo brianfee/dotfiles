@@ -26,13 +26,17 @@ desktop_str() {
 	bspc wm -g | awk -F'[:]' '{print $2, $3, $4, $5, $6}' | {
 		read -r desk1 desk2 desk3 desk4 desk5
 
-		OUTPUT="   "
+		OUTPUT=""
 		for i in {1..5}; do
 			DESKSTATUS="$(eval "echo \$desk$i")"
 			DESKSTATUS="${DESKSTATUS:0:1}"
 
 			if [ $DESKSTATUS = "O" ] || [ $DESKSTATUS = "F" ] || [ $DESKSTATUS = "U" ] ; then
-				OUTPUT="$i"
+				OUTPUT="$OUTPUT $i"
+
+			elif [ $DESKSTATUS = "o" ] || [ $DESKSTATUS = "u" ]; then
+				OUTPUT="$OUTPUT%{F$GREY} $i%{F-}"
+
 			fi
 		done
 
