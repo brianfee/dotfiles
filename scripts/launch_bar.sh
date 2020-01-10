@@ -10,7 +10,8 @@ geom=$width"x64"
 eval $@ | lemonbar -p \
 	-g $geom \
 	-f "FontAwesome:size=12" \
-	-f "Noto Sans:style=bold:size=8.5" &
+	-f "Noto Sans:style=bold:size=8.5" \
+	-B "#15252525" &
 
 disown $!
 exit

@@ -22,6 +22,25 @@ date_str() {
 }
 
 
+desktop_str() {
+	bspc wm -g | awk -F'[:]' '{print $2, $3, $4, $5, $6}' | {
+		read -r desk1 desk2 desk3 desk4 desk5
+
+		OUTPUT="   "
+		for i in {1..5}; do
+			DESKSTATUS="$(eval "echo \$desk$i")"
+			DESKSTATUS="${DESKSTATUS:0:1}"
+
+			if [ $DESKSTATUS = "O" ] || [ $DESKSTATUS = "F" ] || [ $DESKSTATUS = "U" ] ; then
+				OUTPUT="$i"
+			fi
+		done
+
+	echo $OUTPUT
+	}
+}
+
+
 volume_str() {
 	volume=$(pamixer --get-volume)
 	if [ $(pamixer --get-volume-human) == "muted" ]
@@ -44,6 +63,6 @@ openvpn_str() {
 
 
 while true; do
-	echo "%{l}$(volume_str)%{c}$(date_str) $(openvpn_str)%{r}$(battery_str)"
+	echo "%{l}$(volume_str) %{c}$(desktop_str) | $(date_str) $(openvpn_str)%{r}$(battery_str)"
 	sleep 1;
 done
