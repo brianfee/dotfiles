@@ -18,8 +18,10 @@ super + e
 	st ranger
 
 # program launcher
-super + space
-	rofi -show run
+super + {_,ctrl +, shift + }space
+	{rofi -show run,\
+	rofi -show ssh,\
+	gopass ls --flat | rofi -dmenu | xargs --no-run-if-empty gopass show -c}
 
 # window switching menu
 alt + Tab
