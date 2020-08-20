@@ -1,7 +1,0 @@
-#!/bin/sh
-
-echo_string() {
-	date "+%A, %B %d  %{A1:st:}·%{A}  %R %Z"
-}
-
-rrnotify $(echo_string)

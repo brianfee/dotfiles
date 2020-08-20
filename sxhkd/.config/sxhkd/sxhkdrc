@@ -8,7 +8,7 @@
 
 # Most used applications
 super + {_,shift + }Return
-	{st, firefox --private-window https://check.torproject.org}	
+	{st, firefox --private-window https://check.torproject.org}
 
 super + o; {c,f}
 	{chromium, firefox}
@@ -34,7 +34,7 @@ alt + Tab
 
 # Brightness
 {_,shift + ,super + }XF86MonBrightness{Down,Up}
-	xbacklight {-5, -10, =1, +5, +10, =100}
+	statusline backlight {-5, -10, =1, +5, +10, =100}
 
 # Volume
 XF86Audio{LowerVolume,RaiseVolume}
@@ -59,7 +59,8 @@ shift + ~Shift_{L,R}
 
 # Reload sxhkd configuration files:
 super + Escape
-	pkill -SIGUSR1 -x sxhkd
+	pkill -SIGUSR1 -x sxhkd; \
+	pysl "sxhkd reloaded..."
 
 
 
@@ -113,7 +114,8 @@ super + {grave,Tab}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f,node -d} '^{1-9,10}'; \
+	statusline desktop
 
 #
 # Gaps

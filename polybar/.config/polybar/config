@@ -174,22 +174,22 @@ label-full = ${self.label-charging}
 
 ramp-capacity-0-foreground = ${root.warning}
 
-ramp-capacity-0  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-1  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-2  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-3  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-4  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-5  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-6  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-7  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-8  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-9  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-0  = %{A:statusline battery:}     %{A}
+ramp-capacity-1  = %{A:statusline battery:}     %{A}
+ramp-capacity-2  = %{A:statusline battery:}     %{A}
+ramp-capacity-3  = %{A:statusline battery:}     %{A}
+ramp-capacity-4  = %{A:statusline battery:}     %{A}
+ramp-capacity-5  = %{A:statusline battery:}     %{A}
+ramp-capacity-6  = %{A:statusline battery:}     %{A}
+ramp-capacity-7  = %{A:statusline battery:}     %{A}
+ramp-capacity-8  = %{A:statusline battery:}     %{A}
+ramp-capacity-9  = %{A:statusline battery:}     %{A}
 
 
 [module/statusline]
 type = custom/script
 
-exec = ~/code/pysl/pysl.py -w --default-cmd="date '+%A, %B %d %{A1:st:} · %{A} %R:%S %Z'"
+exec = ~/code/pysl/pysl.py -w --default-cmd="date '+%A, %B %d %{A1:st:} · %{A} %R %Z'"
 tail = true
 
 

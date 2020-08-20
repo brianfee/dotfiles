@@ -1,0 +1,91 @@
+#!/bin/bash
+
+fg="#FEFEFE"
+bg="#303030"
+disabled="#666666"
+
+get_battery() {
+	acpi -b | awk -F'[,:%]' '{print $2, $3, $5, $6}' | {
+	read -r status capacity hour minute
+
+	echo "Battery: $capacity%  ·  $hour:$minute"
+	}
+}
+
+get_brightness() {
+	icon="%{F-}%{B-}%{T3} %{T-}"
+	lightdir=/sys/class/backlight/intel_backlight
+	light=`cat $lightdir/brightness`
+	max=`cat $lightdir/max_brightness`
+
+	let brightness=$light*100/$max/5
+
+	output="$icon "
+
+	i=0
+	while [ "$i" -lt 21 ]
+	do
+		if [ $i == $brightness ]
+		then
+			output="$output%{F$fg}┃%{F$disabled}"
+		else
+			if [ $i -lt $brightness ]
+			then
+				output="$output━"
+			else
+				output="$output━"
+			fi
+		fi
+		i=$((i+1))
+	done
+
+	output="$output%{F-}%{B-}"
+	echo -n $output
+}
+
+set_brightness() {
+	echo xbacklight "$@"
+}
+
+get_date() {
+	date "+%A, %B %d  %{A1:st:}·%{A}  %R %Z"
+}
+
+get_desktop() {
+	bspc wm -g | awk -F'[:]' '{print $2, $3, $4, $5, $6}' | {
+		read -r desk1 desk2 desk3 desk4 desk5
+
+		output="%{F-}%{B-}%{T3} %{T-}  "
+		for i in {1..5}; do
+			deskstatus="$(eval "echo \$desk$i")"
+			deskstatus="${deskstatus:0:1}"
+
+			if [ $deskstatus = "O" ] || [ $deskstatus = "F" ] || [ $deskstatus = "U" ] ; then
+				output="$output  "
+			
+			elif [ $deskstatus = "o" ] || [ $deskstatus = "u" ]; then
+				output="$output  "
+
+			elif [ $deskstatus = "f" ]; then
+				output="$output  "
+			fi
+		done
+
+		output="$output%{F-}%{B-}"
+		echo $output
+	}
+}
+
+if [ "$1" == "battery" ]; then
+	pysl "$(get_battery)"
+
+elif [ "$1" == "backlight" ]; then
+	$(set_brightness ${@:2})
+	pysl "$(get_brightness)"
+
+elif [ "$1" == "date" ]; then
+	pysl "$(get_date)"
+
+elif [ "$1" == "desktop" ]; then
+	pysl "$(get_desktop)"
+fi
