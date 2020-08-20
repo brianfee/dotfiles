@@ -1,0 +1,34 @@
+#!/bin/sh
+
+declare -a StringArray=("us" "dvorak")
+
+getKeymap() {
+	setxkbmap -query | grep layout | awk -F: '{ print $2 }' | {
+		read -r keymap
+
+		echo "$keymap"
+	}
+}
+
+switchKeymap() {
+	keymap=$(getKeymap)
+
+	if [ $keymap = "us" ]; then
+		`setxkbmap dvorak`
+	else
+		`setxkbmap us`
+	fi
+}
+
+while getopts l arg; do
+	case "${arg}" in 
+		l) listbit=1;;
+	esac
+done
+shift "$(($OPTIND -1))"
+
+if [[ $listbit -eq 1 ]]; then
+	echo $(getKeymap)
+else
+	$(switchKeymap)
+fi

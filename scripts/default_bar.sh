@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Colors
+# Get colors
+source ~/.dotfiles/colorschemes/dark.cfg
 GREY="#666666"
 
 battery_str() {
@@ -9,7 +10,12 @@ battery_str() {
 
 		if [ $status == "Discharging" ]
 		then
-			echo "$capacity% %{F$GREY}  %{F-}"
+			if [ $capacity -le 10 ]
+			then
+				echo "$capacity% %{F$WARNING}  %{F-}"
+			else
+				echo "$capacity% %{F$DISABLED}  %{F-}"
+			fi
 		else
 			echo "$capacity%   "
 		fi
@@ -19,6 +25,14 @@ battery_str() {
 
 date_str() {
 	echo "$(date "+%A, %B %d · %R %Z")"
+}
+
+binary_date_str() {
+	date=$(~/.dotfiles/scripts/binary_clock.py)
+	date=${date//"0"/" "}
+	date=${date//"1"/" "}
+
+	echo "$date"
 }
 
 
@@ -35,7 +49,7 @@ desktop_str() {
 				OUTPUT="$OUTPUT $i"
 
 			elif [ $DESKSTATUS = "o" ] || [ $DESKSTATUS = "u" ]; then
-				OUTPUT="$OUTPUT%{F$GREY} $i%{F-}"
+				OUTPUT="$OUTPUT%{F$DISABLED} $i%{F-}"
 
 			fi
 		done
@@ -49,7 +63,7 @@ volume_str() {
 	volume=$(pamixer --get-volume)
 	if [ $(pamixer --get-volume-human) == "muted" ]
 	then
-		echo "  %{F$GREY}  %{F-}$volume%"
+		echo "  %{F$DISABLED}  %{F-}$volume%"
 	else
 		echo "    $(pamixer --get-volume-human)"
 	fi
@@ -61,7 +75,7 @@ openvpn_str() {
 	then
 		echo "   "
 	else
-		echo " %{F$GREY}  %{F-}"
+		echo " %{F$DISABLED}  %{F-}"
 	fi
 }
 

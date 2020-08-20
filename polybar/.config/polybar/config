@@ -16,8 +16,8 @@ cursor-click = pointer
 
 ; ---------- Bar Fonts ----------
 font-0 = "Noto Sans:style=Bold:size=9.5;2"
-font-1 = FontAwesome:size=9;2.5
-font-2 = FontAwesome:size=13;4.5
+font-1 = FontAwesome:size=7;2.5
+font-2 = FontAwesome:size=11;4.5
 font-3 = Hack:size=10;2
 
 
@@ -29,8 +29,8 @@ padding = 4
 module-margin = 2
 fixed-center = true
 
-modules-left = pulseaudio xkeyboard 
-modules-center = rrwatcher
+modules-left = pulseaudio xkeyboard
+modules-center = statusline
 modules-right = battery
 
 ; ---------- System Tray ----------
@@ -70,8 +70,8 @@ padding = 4
 module-margin = 1
 fixed-center = true
 
-modules-left = pulseaudio xkeyboard 
-modules-center = rrwatcher
+modules-left = pulseaudio xkeyboard
+modules-center = statusline
 modules-right = battery
 
 ; ---------- System Tray ----------
@@ -186,12 +186,11 @@ ramp-capacity-8  = %{A:batteryNotify.sh:}     %{A}
 ramp-capacity-9  = %{A:batteryNotify.sh:}     %{A}
 
 
-[module/rrwatcher]
+[module/statusline]
 type = custom/script
 
-exec = rrwatcher
-interval = 0.5
-
+exec = ~/code/pysl/pysl.py -w --default-cmd="date '+%A, %B %d %{A1:st:} · %{A} %R:%S %Z'"
+tail = true
 
 
 [global/wm]

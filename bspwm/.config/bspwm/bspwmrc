@@ -10,7 +10,7 @@ xmodmap ~/.Xmodmap
 compton &
 
 # Start Bar
-/usr/local/bin/launch_bar.sh /usr/local/bin/default_bar.sh &
+~/.config/polybar/launch.sh &
 
 
 # Hotkeys

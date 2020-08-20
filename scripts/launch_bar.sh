@@ -1,5 +1,8 @@
 #!/usr/bin/sh
 
+# Get colors
+source ~/.dotfiles/colorschemes/dark.cfg
+
 killall -q lemonbar
 
 while pgrep -u $UID -x lemonbar > /dev/null;do sleep 1; done
@@ -11,7 +14,7 @@ eval $@ | lemonbar -p \
 	-g $geom \
 	-f "FontAwesome:size=12" \
 	-f "Noto Sans:style=bold:size=8.5" \
-	-B "#15252525" &
+	-B "$PRIMARY" &
 
 disown $!
 exit
