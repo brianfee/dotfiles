@@ -55,24 +55,24 @@ get_desktop() {
 	bspc wm -g | awk -F'[:]' '{print $2, $3, $4, $5, $6}' | {
 		read -r desk1 desk2 desk3 desk4 desk5
 
-		output="%{F-}%{B-}%{T3} %{T-}  "
+		out="%{F-}%{B-}%{T3} %{T-}  "
 		for i in {1..5}; do
-			deskstatus="$(eval "echo \$desk$i")"
-			deskstatus="${deskstatus:0:1}"
+			desk="$(eval "echo \$desk$i")"
+			desk="${desk:0:1}"
 
-			if [ $deskstatus = "O" ] || [ $deskstatus = "F" ] || [ $deskstatus = "U" ] ; then
-				output="$output  "
+			if [ $desk = "O" ] || [ $desk = "F" ] || [ $desk = "U" ] ; then
+				out="$out%{A1:bspc desktop -f $i;statusline desktop:} %{A}"
 			
-			elif [ $deskstatus = "o" ] || [ $deskstatus = "u" ]; then
-				output="$output  "
+			elif [ $desk = "o" ] || [ $desk = "u" ]; then
+				out="$out%{A1:bspc desktop -f $i;statusline desktop:} %{A}"
 
-			elif [ $deskstatus = "f" ]; then
-				output="$output  "
+			elif [ $desk = "f" ]; then
+				out="$out%{A1:bspc desktop -f $i;statusline desktop:} %{A}"
 			fi
 		done
 
-		output="$output%{F-}%{B-}"
-		echo $output
+		out="$out%{F-}%{B-}"
+		echo $out
 	}
 }
 

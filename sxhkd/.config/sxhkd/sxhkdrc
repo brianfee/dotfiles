@@ -106,11 +106,13 @@ super + {p,shift + p,comma,period}
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+	bspc desktop -f {prev,next}.local; \
+	statusline desktop
 
 # focus the last node/desktop
 super + {grave,Tab}
-	bspc {node,desktop} -f last
+	bspc {node,desktop} -f last; \
+	statusline desktop
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
