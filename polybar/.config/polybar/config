@@ -28,6 +28,7 @@ width = 100%
 padding = 4
 module-margin = 2
 fixed-center = true
+enable-ipc = true
 
 modules-left = pulseaudio xkeyboard
 modules-center = statusline
@@ -69,6 +70,7 @@ width = 100%
 padding = 4
 module-margin = 1
 fixed-center = true
+enable-ipc = true
 
 modules-left = pulseaudio xkeyboard
 modules-center = statusline
@@ -189,7 +191,7 @@ ramp-capacity-9  = %{A:statusline battery:}     %{A}
 [module/statusline]
 type = custom/script
 
-exec = ~/code/pysl/pysl.py -w --default-cmd="date '+%A, %B %d %{A1:st:} · %{A} %R %Z'"
+exec = pysl -w --default-cmd="date '+%A, %B %d %{A1:st:} · %{A} %R %Z'" -t 0.1
 tail = true
 
 
