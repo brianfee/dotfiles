@@ -4,7 +4,7 @@
 ; ----------- Bar Colors -----------
 foreground =		#FEFEFE
 fg_alt =		#CCCCCC
-background =		#25181818
+background =		#DD202020
 bg_alt =		#303030
 accent =		#0B76DE
 acc_fg =		#EEEEEE
