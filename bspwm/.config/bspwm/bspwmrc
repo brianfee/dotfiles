@@ -9,12 +9,8 @@ xmodmap ~/.Xmodmap
 # Start Compositor
 compton &
 
-# Start Notification Daemon
-rrnotifyd rrdate &
-
-# Start Polybar
-~/.config/polybar/launch.sh
-poly-notify.sh &
+# Start Bar
+~/.config/polybar/launch.sh &
 
 
 # Hotkeys

@@ -4,7 +4,7 @@
 ; ----------- Bar Colors -----------
 foreground =		#FEFEFE
 fg_alt =		#CCCCCC
-background =		#25181818
+background =		#DD202020
 bg_alt =		#303030
 accent =		#0B76DE
 acc_fg =		#EEEEEE
@@ -16,8 +16,8 @@ cursor-click = pointer
 
 ; ---------- Bar Fonts ----------
 font-0 = "Noto Sans:style=Bold:size=9.5;2"
-font-1 = FontAwesome:size=9;2.5
-font-2 = FontAwesome:size=13;4.5
+font-1 = FontAwesome:size=7;2.5
+font-2 = FontAwesome:size=11;4.5
 font-3 = Hack:size=10;2
 
 
@@ -28,9 +28,10 @@ width = 100%
 padding = 4
 module-margin = 2
 fixed-center = true
+enable-ipc = true
 
-modules-left = pulseaudio xkeyboard 
-modules-center = rrwatcher
+modules-left = pulseaudio xkeyboard
+modules-center = statusline
 modules-right = battery
 
 ; ---------- System Tray ----------
@@ -69,9 +70,10 @@ width = 100%
 padding = 4
 module-margin = 1
 fixed-center = true
+enable-ipc = true
 
-modules-left = pulseaudio xkeyboard 
-modules-center = rrwatcher
+modules-left = pulseaudio xkeyboard
+modules-center = statusline
 modules-right = battery
 
 ; ---------- System Tray ----------
@@ -174,24 +176,23 @@ label-full = ${self.label-charging}
 
 ramp-capacity-0-foreground = ${root.warning}
 
-ramp-capacity-0  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-1  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-2  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-3  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-4  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-5  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-6  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-7  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-8  = %{A:batteryNotify.sh:}     %{A}
-ramp-capacity-9  = %{A:batteryNotify.sh:}     %{A}
+ramp-capacity-0  = %{A:statusline battery:}     %{A}
+ramp-capacity-1  = %{A:statusline battery:}     %{A}
+ramp-capacity-2  = %{A:statusline battery:}     %{A}
+ramp-capacity-3  = %{A:statusline battery:}     %{A}
+ramp-capacity-4  = %{A:statusline battery:}     %{A}
+ramp-capacity-5  = %{A:statusline battery:}     %{A}
+ramp-capacity-6  = %{A:statusline battery:}     %{A}
+ramp-capacity-7  = %{A:statusline battery:}     %{A}
+ramp-capacity-8  = %{A:statusline battery:}     %{A}
+ramp-capacity-9  = %{A:statusline battery:}     %{A}
 
 
-[module/rrwatcher]
+[module/statusline]
 type = custom/script
 
-exec = rrwatcher
-interval = 0.5
-
+exec = pysl -w --default-cmd="date '+%A, %B %d %{A1:st:} · %{A} %R %Z'" -t 0.1
+tail = true
 
 
 [global/wm]

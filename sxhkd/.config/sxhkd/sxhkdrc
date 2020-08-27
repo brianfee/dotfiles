@@ -8,7 +8,7 @@
 
 # Most used applications
 super + {_,shift + }Return
-	{st, firefox --private-window https://check.torproject.org}	
+	{st, firefox --private-window https://check.torproject.org}
 
 super + o; {c,f}
 	{chromium, firefox}
@@ -18,14 +18,13 @@ super + e
 	st ranger
 
 # program launcher
-super + {_,ctrl +, shift + }space
-	{rofi -show run,\
-	rofi -show ssh,\
-	gopass ls --flat | rofi -dmenu | xargs --no-run-if-empty gopass show -c}
+super + {_, shift + }space
+	{rofi -theme config -show combi,\
+	gopass ls --flat | rofi -theme config -dmenu -p " " | xargs --no-run-if-empty gopass show -c}
 
 # window switching menu
 alt + Tab
-	rofi -show window
+	rofi -theme config -show window
 
 
 #
@@ -34,7 +33,7 @@ alt + Tab
 
 # Brightness
 {_,shift + ,super + }XF86MonBrightness{Down,Up}
-	rrbacklight {-5, -10, =1, +5, +10, =100}
+	statusline backlight {-5, -10, =1, +5, +10, =100}
 
 # Volume
 XF86Audio{LowerVolume,RaiseVolume}
@@ -48,9 +47,6 @@ XF86AudioMute
 # Notifications
 #
 
-super + i ; {b,d,l,i}
-	{rrbattery,rrdesktop,rrbacklight,rrnotify External IP: `curl icanhazip.com`}
-
 
 #
 # Miscellaneous
@@ -62,8 +58,8 @@ shift + ~Shift_{L,R}
 
 # Reload sxhkd configuration files:
 super + Escape
-	rrnotify Reloading SXHKD; \
-	pkill -SIGUSR1 -x sxhkd
+	pkill -SIGUSR1 -x sxhkd; \
+	pysl "sxhkd reloaded..."
 
 
 
@@ -109,16 +105,18 @@ super + {p,shift + p,comma,period}
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+	bspc desktop -f {prev,next}.local; \
+	statusline desktop
 
 # focus the last node/desktop
 super + {grave,Tab}
-	bspc {node,desktop} -f last
+	bspc {node,desktop} -f last; \
+	statusline desktop
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'; \
-	rrdesktop
+	statusline desktop
 
 #
 # Gaps
